@@ -6,8 +6,8 @@ import chardet
 def load_data(file_path):
     if not os.path.exists(file_path):
         return None
-    file_content = open(file_path, 'rb').read()
-    encoding = chardet.detect(file_content)['encoding']
+    with open(file_path, 'rb') as file_handler:
+        encoding = chardet.detect(file_handler.read())['encoding']
     with open(file_path, 'r', encoding=encoding) as file_handler:
         return json.load(file_handler)
 
